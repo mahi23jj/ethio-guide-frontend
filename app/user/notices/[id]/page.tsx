@@ -128,16 +128,17 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, FileText, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { notices } from "@/lib/noticesData";
 
-export default function NoticeDetailPage({ params }: { params: { id: string } }) {
+export default function NoticeDetailPage() {
   const { t } = useTranslation("user");
   const router = useRouter();
+  const params = useParams<{ id: string }>();
   const noticeId = Number(params.id);
   const notice = notices.find(n => n.id === noticeId);
 
@@ -160,8 +161,8 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
   return (
     <main className="min-h-screen w-full bg-gray-50 relative overflow-hidden p-4 sm:p-6 md:p-8">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full blur-3xl" style={{ background: 'radial-gradient(closest-side, rgba(167,179,185,0.10), rgba(167,179,185,0))' }} />
-        <div className="absolute -bottom-28 -left-28 w-64 h-64 rounded-full blur-3xl" style={{ background: 'radial-gradient(closest-side, rgba(94,156,141,0.10), rgba(94,156,141,0))' }} />
+        <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(167,179,185,0.10),rgba(167,179,185,0))]" />
+        <div className="absolute -bottom-28 -left-28 h-64 w-64 rounded-full blur-3xl bg-[radial-gradient(closest-side,rgba(94,156,141,0.10),rgba(94,156,141,0))]" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto space-y-6">
@@ -243,7 +244,11 @@ export default function NoticeDetailPage({ params }: { params: { id: string } })
                       <span className="font-medium text-[#111827]">{file.name}</span>
                       <div className="text-xs text-[#6b7280]">{file.size}</div>
                     </div>
-                    <button className="text-[#3a6a8d] hover:underline">
+                    <button
+                      className="text-[#3a6a8d] hover:underline"
+                      aria-label={`Download ${file.name}`}
+                      title={`Download ${file.name}`}
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
                       </svg>

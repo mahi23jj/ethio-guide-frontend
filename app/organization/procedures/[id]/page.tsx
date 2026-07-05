@@ -4,7 +4,7 @@ import ProcedurePropCapital from "@/types/procedureRecive";
 // import { options } from "@/app/api/auth/[...nextauth]/options";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditProcedure({ params }: Props) {
