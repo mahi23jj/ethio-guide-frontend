@@ -4,7 +4,7 @@ import ProcedurePropCapital from "@/types/procedureRecive";
 // import { options } from "@/app/api/auth/[...nextauth]/options";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditProcedure({ params }: Props) {
@@ -16,7 +16,7 @@ export default async function EditProcedure({ params }: Props) {
  
   
   const res = await fetch(
-    `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures/${id}`,
+    `https://ethio-guide-backend.onrender.com/api/v1/procedures/${id}`,
     {
       method: "GET",
       headers: {
