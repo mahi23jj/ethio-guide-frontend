@@ -10,7 +10,7 @@ function readEnvToken(): string | null {
 export const historyApi = createApi({
   reducerPath: "historyApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://ethio-guide-backend-dlwz.onrender.com/api/v1",
+    baseUrl: "https://ethio-guide-backend-1.onrender.com/api/v1",
     prepareHeaders: (headers) => {
       // keep default header set (may be overwritten by endpoint-level headers)
       const token =

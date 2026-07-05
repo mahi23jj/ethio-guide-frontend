@@ -30,7 +30,7 @@ export default function EditNoticePage() {
     const fetchNotice = async () => {
       try {
         const res = await fetch(
-          `https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices`,
+          `https://ethio-guide-backend-1.onrender.com/api/v1/notices`,
           {
             headers: {
               // Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export default function EditNoticePage() {
 
     try {
       const res = await fetch(
-        `https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices/${id}`,
+        `https://ethio-guide-backend-1.onrender.com/api/v1/notices/${id}`,
         {
           method: "PATCH",
           headers: {

@@ -82,7 +82,7 @@ export default function EditProcedurePage({
     console.log("Updating with:", payload);
 
     const res = await fetch(
-      `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures/${procedure.ID}`,
+      `https://ethio-guide-backend-1.onrender.com/api/v1/procedures/${procedure.ID}`,
       {
         method: "PATCH",
         headers: {

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server"
 
-const RAW = process.env.NEXT_PUBLIC_API_URL || "https://ethio-guide-backend-dlwz.onrender.com"
+const RAW = process.env.NEXT_PUBLIC_API_URL || "https://ethio-guide-backend-1.onrender.com"
 const BASE = RAW.replace(/\/$/, "")
 const HAS_API_SUFFIX = /\/api\/v1$/.test(BASE)
 

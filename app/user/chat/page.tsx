@@ -97,7 +97,7 @@
 //   const router = useRouter();
 //   const [createChecklist] = useCreateChecklistMutation();
 //   const [translating, setTranslating] = useState<Record<string, boolean>>({});
-//   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend-dlwz.onrender.com/api/v1';
+//   const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend-1.onrender.com/api/v1';
 
 //   const isAmharic = (text: string): boolean => /[\u1200-\u137F]/.test(text);
 
@@ -1155,7 +1155,7 @@ export default function ChatPage() {
   const [translating, setTranslating] = useState<Record<string, boolean>>({});
   const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_URL ||
-    "https://ethio-guide-backend-dlwz.onrender.com/api/v1";
+    "https://ethio-guide-backend-1.onrender.com/api/v1";
 
   const isAmharic = (text: string): boolean => /[\u1200-\u137F]/.test(text);
 

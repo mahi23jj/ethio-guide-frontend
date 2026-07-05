@@ -116,7 +116,7 @@ export default function AdminProcedures() {
   const handleDelete = async (id: string) => {
     toast.success("Item deleted successfully!");
     await fetch(
-      `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures/${id}`,
+      `https://ethio-guide-backend-1.onrender.com/api/v1/procedures/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -138,11 +138,11 @@ export default function AdminProcedures() {
     const fetchProcedures = async () => {
       try {
         const res = await fetch(
-          `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures?page=${page}&limit=${5}&organizationID=${userId}`
+          `https://ethio-guide-backend-1.onrender.com/api/v1/procedures?page=${page}&limit=${5}&organizationID=${userId}`
         );
 
         // const res = await fetch(
-        //   `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures`
+        //   `https://ethio-guide-backend-1.onrender.com/api/v1/procedures`
         // );
 
         const data = await res.json();

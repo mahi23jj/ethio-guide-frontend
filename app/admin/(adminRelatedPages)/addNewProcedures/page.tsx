@@ -80,7 +80,7 @@ export default function AddProcedurePage() {
       console.log("Submitting payload:", payload);
 
       const res = await fetch(
-        "https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures",
+        "https://ethio-guide-backend-1.onrender.com/api/v1/procedures",
         {
           method: "POST",
           headers: {

@@ -35,7 +35,7 @@ export default function NoticeManagement() {
   const handleDelete = async (id: string) => {
     // toast.success("Item deleted successfully!");
     await fetch(
-      `https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices/${id}`,
+      `https://ethio-guide-backend-1.onrender.com/api/v1/notices/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -50,9 +50,9 @@ export default function NoticeManagement() {
   useEffect(() => {
     const fetchsNotices = async () => {
       try {
-        // const res = await fetch(`https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices?page=${page}&limit=${5}`);
+        // const res = await fetch(`https://ethio-guide-backend-1.onrender.com/api/v1/notices?page=${page}&limit=${5}`);
         const res = await fetch(
-          `https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices`
+          `https://ethio-guide-backend-1.onrender.com/api/v1/notices`
         );
 
         const data = await res.json();

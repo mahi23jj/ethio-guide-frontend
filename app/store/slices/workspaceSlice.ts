@@ -28,7 +28,7 @@ function readToken(): string | null {
 }
 
 const RAW_BACKEND = (
-  process.env.NEXT_PUBLIC_API_URL || "https://ethio-guide-backend-dlwz.onrender.com"
+  process.env.NEXT_PUBLIC_API_URL || "https://ethio-guide-backend-1.onrender.com"
 ).replace(/\/$/, "");
 const API_BASE = /\/api\/v1$/.test(RAW_BACKEND)
   ? RAW_BACKEND
