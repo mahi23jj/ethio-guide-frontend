@@ -1,301 +1,253 @@
+"use client";
 
-"use client"
-import { useState } from "react";
-import { useCreateProcedureMutation, useCreateNoticeMutation } from "@/app/services/orgsApi";
-// Placeholder hooks for future endpoints
-// import { useGetOrgMetricsQuery, useGetOrgRecentActivityQuery, useGetOrgTopProceduresQuery } from "@/app/services/orgsApi";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { IoMegaphoneOutline } from "react-icons/io5";
-import { MdOutlineFeedback } from "react-icons/md";
+import { FormEvent, useState } from "react";
+import { Building, FileText, Megaphone, Plus } from "lucide-react";
 import { FaUsers } from "react-icons/fa6";
-import { Building, Plus, Megaphone, FileText, MessageSquare } from "lucide-react";
+import { MdOutlineFeedback } from "react-icons/md";
+import { Button } from "@/components/ui/button";
+import {
+  useCreateNoticeMutation,
+  useCreateProcedureMutation,
+} from "@/app/services/orgsApi";
 
-export default function OrgDashboard() {
-  // Modal state
-  const [showProcedureModal, setShowProcedureModal] = useState(false);
-  const [showNoticeModal, setShowNoticeModal] = useState(false);
-
-  // Form state
-  const [procedureForm, setProcedureForm] = useState({ title: "", description: "" });
-  const [noticeForm, setNoticeForm] = useState({ title: "", content: "" });
-
-
-  // Replace with actual orgId from session or props
-  const orgId = "demo-org-id";
-
-  // Placeholder for future RTK Query hooks
-  // const { data: metrics, isLoading: metricsLoading } = useGetOrgMetricsQuery(orgId);
-  // const { data: recentActivity, isLoading: activityLoading } = useGetOrgRecentActivityQuery(orgId);
-  // const { data: topProcedures, isLoading: topProceduresLoading } = useGetOrgTopProceduresQuery(orgId);
-
-  // RTK Query mutations
-  const [createProcedure, { isLoading: isCreatingProcedure }] = useCreateProcedureMutation();
-  const [createNotice, { isLoading: isCreatingNotice }] = useCreateNoticeMutation();
-
-  // Handlers
-  const handleProcedureSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await createProcedure({ orgId, ...procedureForm }).unwrap();
-      setShowProcedureModal(false);
-      setProcedureForm({ title: "", description: "" });
-      alert("Procedure created!");
-    } catch (err) {
-      alert("Failed to create procedure");
-    }
-  };
-  const handleNoticeSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await createNotice({ orgId, ...noticeForm }).unwrap();
-      setShowNoticeModal(false);
-      setNoticeForm({ title: "", content: "" });
-      alert("Notice created!");
-    } catch (err) {
-      alert("Failed to create notice");
-    }
-  };
-
-  // Example: Replace with metrics?.proceduresCount, etc. when endpoint is ready
-  const stats = [
-    {
-      data: "-", // metrics?.proceduresCount ?? "-",
-// import { MdOutlineFeedback } from "react-icons/md";
-// import { FaUsers } from "react-icons/fa6";
-import { Plus, Megaphone, FileText, MessageSquare } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Building } from "lucide-react";
+interface OrgDashboardProps {
+  totalProcedures: number;
+  totalNotices: number;
+}
 
 export default function OrgDashboard({
   totalProcedures,
   totalNotices,
-}: {
-  totalProcedures: number;
-  totalNotices: number;
-}) {
-  const route = useRouter();
+}: OrgDashboardProps) {
+  const [showProcedureModal, setShowProcedureModal] = useState(false);
+  const [showNoticeModal, setShowNoticeModal] = useState(false);
+  const [procedureForm, setProcedureForm] = useState({
+    title: "",
+    description: "",
+  });
+  const [noticeForm, setNoticeForm] = useState({ title: "", content: "" });
+
+  const [createProcedure, { isLoading: isCreatingProcedure }] =
+    useCreateProcedureMutation();
+  const [createNotice, { isLoading: isCreatingNotice }] =
+    useCreateNoticeMutation();
+
+  const orgId = "demo-org-id";
+
   const stats = [
     {
       data: totalProcedures,
       description: "Procedures Managed",
       icon: (
-        <div className="bg-gray-100 p-3 rounded-2xl ">
-          <FileText className="w-6 h-6  text-[#3A6A8D] mb-2" />
+        <div className="rounded-2xl bg-gray-100 p-3">
+          <FileText className="mb-2 h-6 w-6 text-[#3A6A8D]" />
         </div>
       ),
     },
     {
-      data: "-", // metrics?.activeNoticesCount ?? "-",
       data: totalNotices,
       description: "Active Notices",
       icon: (
-        <div className="bg-gray-100 p-3 rounded-2xl ">
-          <IoMegaphoneOutline className="w-6 h-6 text-[#5E9C8D] mb-2" />
+        <div className="rounded-2xl bg-gray-100 p-3">
+          <Megaphone className="mb-2 h-6 w-6 text-[#5E9C8D]" />
         </div>
       ),
     },
     {
-      data: "-", // metrics?.pendingFeedbackCount ?? "-",
+      data: "-",
       description: "Pending Feedback",
       icon: (
-        <div className="bg-gray-100 p-3 rounded-2xl ">
-          <MdOutlineFeedback className="w-6 h-6 text-[#1C3B2E] mb-2" />
+        <div className="rounded-2xl bg-gray-100 p-3">
+          <MdOutlineFeedback className="mb-2 h-6 w-6 text-[#1C3B2E]" />
         </div>
       ),
     },
     {
-      data: "-", // metrics?.userInteractionsCount ?? "-",
+      data: "-",
       description: "User Interactions",
       icon: (
-        <div className="bg-gray-100 p-3 rounded-2xl ">
-          <FaUsers className="w-6 h-6 text-[#1C3B2E] mb-2" />
+        <div className="rounded-2xl bg-gray-100 p-3">
+          <FaUsers className="mb-2 h-6 w-6 text-[#1C3B2E]" />
         </div>
       ),
     },
-    // {
-    //   data: 23,
-    //   description: "Pending Feedback",
-    //   icon: (
-    //     <div className="bg-gray-100 p-3 rounded-2xl ">
-    //       <MdOutlineFeedback className="w-6 h-6 text-[#1C3B2E] mb-2" />
-    //     </div>
-    //   ),
-    // },
-    // {
-    //   data: 1284,
-    //   description: "User Interactions",
-    //   icon: (
-    //     <div className="bg-gray-100 p-3 rounded-2xl ">
-    //       <FaUsers className="w-6 h-6 text-[#1C3B2E] mb-2" />
-    //     </div>
-    //   ),
-    // },
   ];
 
+  const handleProcedureSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      await createProcedure({ orgId, ...procedureForm }).unwrap();
+      setShowProcedureModal(false);
+      setProcedureForm({ title: "", description: "" });
+      alert("Procedure created!");
+    } catch {
+      alert("Failed to create procedure");
+    }
+  };
+
+  const handleNoticeSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      await createNotice({ orgId, ...noticeForm }).unwrap();
+      setShowNoticeModal(false);
+      setNoticeForm({ title: "", content: "" });
+      alert("Notice created!");
+    } catch {
+      alert("Failed to create notice");
+    }
+  };
+
   return (
-    <div className="p-6 space-y-6 w-full">
-      {/* Welcome Section */}
-      <div className="relative bg-gradient-to-r bg-[#3A6A8D] text-white p-6 rounded-2xl shadow py-10">
-        <h1 className="text-2xl font-semibold">Welcome back, this Organizaion</h1>
-        <Building className="absolute top-5 right-5 size-20 text-primary-light" />
+    <div className="w-full space-y-6 p-6">
+      <div className="relative overflow-hidden rounded-2xl bg-[#3A6A8D] px-6 py-10 text-white shadow">
+        <h1 className="text-2xl font-semibold">Organization dashboard</h1>
+        <p className="mt-2 max-w-2xl text-sm text-white/80">
+          Track procedures and notices from one place.
+        </p>
+        <Building className="absolute right-5 top-5 size-20 text-white/25" />
       </div>
 
-      {/* Actions */}
-      <div className="flex space-x-4 text-white">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {stats.map((stat) => (
+          <div
+            key={stat.description}
+            className="rounded-2xl border bg-white p-5 shadow-sm"
+          >
+            <div className="mb-4">{stat.icon}</div>
+            <div className="text-3xl font-semibold text-slate-900">
+              {stat.data}
+            </div>
+            <div className="mt-1 text-sm text-slate-500">
+              {stat.description}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-4">
         <Button
-          className="flex items-center space-x-2 bg-[#3A6A8D] hover:bg-[#5C87A3]"
+          className="flex items-center gap-2 bg-[#3A6A8D] text-white hover:bg-[#5C87A3]"
           onClick={() => setShowProcedureModal(true)}
-          onClick={() => route.push("/organization/addNewProcedures")}
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="h-4 w-4" />
           <span>Add New Procedure</span>
         </Button>
         <Button
-          className="flex items-center space-x-2 bg-[#5E9C8D] hover:bg-[#7FB4A6]"
+          className="flex items-center gap-2 bg-[#5E9C8D] text-white hover:bg-[#7FB4A6]"
           onClick={() => setShowNoticeModal(true)}
         >
-          <Megaphone className="w-4 h-4" />
+          <Megaphone className="h-4 w-4" />
           <span>Create Notice</span>
         </Button>
       </div>
 
-      {/* Add New Procedure Modal */}
       {showProcedureModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Add New Procedure</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <h2 className="mb-4 text-lg font-semibold">Add New Procedure</h2>
             <form onSubmit={handleProcedureSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Title</label>
+                <label className="mb-1 block text-sm font-medium">Title</label>
                 <input
-                  className="w-full border rounded px-3 py-2"
+                  className="w-full rounded border px-3 py-2"
+                  placeholder="Procedure title"
                   value={procedureForm.title}
-                  onChange={e => setProcedureForm(f => ({ ...f, title: e.target.value }))}
+                  onChange={(event) =>
+                    setProcedureForm((current) => ({
+                      ...current,
+                      title: event.target.value,
+                    }))
+                  }
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Description</label>
+                <label className="mb-1 block text-sm font-medium">
+                  Description
+                </label>
                 <textarea
-                  className="w-full border rounded px-3 py-2"
+                  className="w-full rounded border px-3 py-2"
+                  placeholder="Procedure description"
                   value={procedureForm.description}
-                  onChange={e => setProcedureForm(f => ({ ...f, description: e.target.value }))}
+                  onChange={(event) =>
+                    setProcedureForm((current) => ({
+                      ...current,
+                      description: event.target.value,
+                    }))
+                  }
                   required
                 />
               </div>
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={() => setShowProcedureModal(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowProcedureModal(false)}
+                >
                   Cancel
                 </Button>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={isCreatingProcedure}>
+                  {isCreatingProcedure ? "Submitting..." : "Submit"}
+                </Button>
               </div>
             </form>
           </div>
         </div>
       )}
 
-      {/* Create Notice Modal */}
       {showNoticeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Create Notice</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <h2 className="mb-4 text-lg font-semibold">Create Notice</h2>
             <form onSubmit={handleNoticeSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Title</label>
+                <label className="mb-1 block text-sm font-medium">Title</label>
                 <input
-                  className="w-full border rounded px-3 py-2"
+                  className="w-full rounded border px-3 py-2"
+                  placeholder="Notice title"
                   value={noticeForm.title}
-                  onChange={e => setNoticeForm(f => ({ ...f, title: e.target.value }))}
+                  onChange={(event) =>
+                    setNoticeForm((current) => ({
+                      ...current,
+                      title: event.target.value,
+                    }))
+                  }
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Content</label>
+                <label className="mb-1 block text-sm font-medium">Content</label>
                 <textarea
-                  className="w-full border rounded px-3 py-2"
+                  className="w-full rounded border px-3 py-2"
+                  placeholder="Notice content"
                   value={noticeForm.content}
-                  onChange={e => setNoticeForm(f => ({ ...f, content: e.target.value }))}
+                  onChange={(event) =>
+                    setNoticeForm((current) => ({
+                      ...current,
+                      content: event.target.value,
+                    }))
+                  }
                   required
                 />
               </div>
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={() => setShowNoticeModal(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setShowNoticeModal(false)}
+                >
                   Cancel
                 </Button>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={isCreatingNotice}>
+                  {isCreatingNotice ? "Submitting..." : "Submit"}
+                </Button>
               </div>
             </form>
           </div>
         </div>
       )}
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {stats.map(({ data, description, icon }) => (
-          <Card
-            key={data}
-            className="shadow-sm border-gray-50 hover:scale-105 transition-transform duration-300 cursor-pointer"
-          >
-            <CardContent className="flex items-center justify-between p-4 ">
-              {icon}
-
-              <p className="text-2xl font-bold">{data}</p>
-            </CardContent>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">{description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Recent Activity and Quick Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Recent Activity */}
-        <Card className="md:col-span-2 shadow-sm border-gray-50">
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {/* Replace with recentActivity?.items.map(...) when endpoint is ready */}
-            <ul className="space-y-4">
-              <li className="text-muted-foreground">No activity data yet.</li>
-            </ul>
-            <Button variant="link" className="mt-4" disabled>
-              View all activities
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Quick Overview */}
-        {/* <Card className="shadow-sm border-gray-50">
-          <CardHeader>
-            <CardTitle>Quick Overview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {/* Replace with topProcedures?.map(...) when endpoint is ready */}
-            <div className="space-y-2">
-              <p className="text-sm">
-                <span className="text-blue-600">●</span> Active Procedures: -
-              </p>
-              <p className="text-sm">
-                <span className="text-[#5E9C8D]">●</span> Draft Procedures: -
-              </p>
-              <p className="text-sm">
-                <span className="text-gray-600">●</span> Archived: -
-              </p>
-            </div>
-            <div className="mt-4">
-              <hr />
-              <h4 className="text-sm font-medium mb-2 mt-5">Top Procedures</h4>
-              <ul className="space-y-1 text-sm">
-                <li>No data yet.</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card> */}
-      </div>
     </div>
   );
 }
