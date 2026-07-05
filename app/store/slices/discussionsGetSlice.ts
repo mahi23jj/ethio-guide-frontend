@@ -16,7 +16,7 @@ export const discussionsListApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl:
       process.env.NEXT_PUBLIC_API_URL ||
-      "https://ethio-guide-backend.onrender.com/api/v1",
+      "https://ethio-guide-backend-dlwz.onrender.com/api/v1",
     prepareHeaders: (headers) => {
       const token = readAuthToken() || readEnvToken();
       if (token) headers.set("Authorization", `Bearer ${token}`);

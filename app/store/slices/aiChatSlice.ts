@@ -142,7 +142,7 @@
 // import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 // import axios from 'axios';
 
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend.onrender.com/api/v1';
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend-dlwz.onrender.com/api/v1';
 
 // interface Message {
 //   id: string;
@@ -338,7 +338,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend.onrender.com/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ethio-guide-backend-dlwz.onrender.com/api/v1';
 
 interface Message {
   id: string;

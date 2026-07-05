@@ -47,7 +47,7 @@ export default function AdminFeedback() {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://ethio-guide-backend.onrender.com/api/v1/feedback?page=${page}&limit=${limit}`,
+          `https://ethio-guide-backend-dlwz.onrender.com/api/v1/feedback?page=${page}&limit=${limit}`,
           {
             method: "GET",
             headers: {

@@ -11,7 +11,7 @@ const getAuthToken = () => {
 export const orgsApi = createApi({
   reducerPath: 'orgsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://ethio-guide-backend.onrender.com/api/v1/',
+    baseUrl: 'https://ethio-guide-backend-dlwz.onrender.com/api/v1/',
     prepareHeaders: (headers) => {
       const token = getAuthToken();
       if (token) {

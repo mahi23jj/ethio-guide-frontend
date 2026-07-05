@@ -41,7 +41,7 @@ export default function CreateOfficialNotice() {
 
   try {
     const res = await fetch(
-      "https://ethio-guide-backend.onrender.com/api/v1/notices",
+      "https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices",
       {
         method: "POST",
         headers: {

@@ -13,7 +13,7 @@ export default async function EditProcedure({ params }: Props) {
   // const token = session?.accessToken;
   
   const res = await fetch(
-    `https://ethio-guide-backend.onrender.com/api/v1/procedures/${id}`,
+    `https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures/${id}`,
     {
       method: "GET",
       headers: {

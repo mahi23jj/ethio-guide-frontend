@@ -4,7 +4,7 @@ import type { NoticesResponse } from "../../types/notices";
 export const noticesApi = createApi({
   reducerPath: "noticesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://ethio-guide-backend.onrender.com/api/v1/",
+    baseUrl: "https://ethio-guide-backend-dlwz.onrender.com/api/v1/",
     // no auth headers for notices
   }),
   endpoints: (builder) => ({

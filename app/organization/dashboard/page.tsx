@@ -3,12 +3,12 @@ import OrgDashboard from "@/components/organizationalFiles/OrgDashboard";
 
 const page = async () => {
   const res = await fetch(
-    "https://ethio-guide-backend.onrender.com/api/v1/procedures",
+    "https://ethio-guide-backend-dlwz.onrender.com/api/v1/procedures",
     { cache: "no-store" }
   );
 
   const res2 = await fetch(
-    "https://ethio-guide-backend.onrender.com/api/v1/notices",
+    "https://ethio-guide-backend-dlwz.onrender.com/api/v1/notices",
     { cache: "no-store" }
   );
 

@@ -23,7 +23,7 @@ export default function RegisterOrganization() {
     setMessage(null);
 
     try {
-      const res = await fetch("https://ethio-guide-backend.onrender.com/api/v1/orgs", {
+      const res = await fetch("https://ethio-guide-backend-dlwz.onrender.com/api/v1/orgs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
