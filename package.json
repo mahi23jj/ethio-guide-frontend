@@ -7,7 +7,7 @@
     "dev:webpack": "next dev",
     "dev:clean": "bash -lc 'rm -rf .next && next dev --turbopack'",
     "clean": "bash -lc 'rm -rf .next .turbo'",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -37,7 +37,7 @@
     "i18next-browser-languagedetector": "^8.2.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.541.0",
-    "next": "^16.2.10",
+    "next": "^15.5.20",
     "next-auth": "^4.24.11",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
